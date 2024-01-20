@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="health.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Health Calculator</h1>
+
+    <form id="bmiForm">
+        <label for="weight">Weight (kg):</label>
+        <input type="number" id="weight" required step="0.1">
+
+        <label for="height">Height (m):</label>
+        <input type="number" id="height" required step="0.01">
+
+        <button type="button" onclick="calculateBMI()">Calculate BMI</button>
+    </form>
+
+    <div id="result"></div>
+
+    <script>
+        console.log("hello");
+        function calculateBMI() {
+            var weight = parseFloat(document.getElementById('weight').value);
+            var height = parseFloat(document.getElementById('height').value);
+
+            if (isNaN(weight) || isNaN(height) || weight <= 0 || height <= 0) {
+                alert("Please enter valid weight and height.");
+                return;
+            }
+
+            var bmi = weight / (height * height);
+
+            var resultElement = document.getElementById('result');
+            resultElement.innerHTML = '<h2>Your BMI:</h2>' +
+                                      '<p>' + bmi.toFixed(2) + '</p>' +
+                                      '<p><strong>Interpretation:</strong> ' + getBMICategory(bmi) + '</p>';
+        }
+
+        function getBMICategory(bmi) {
+            if (bmi < 18.5) {
+                return 'Underweight';
+            } else if (bmi >= 18.5 && bmi < 25) {
+                return 'Normal weight';
+            } else if (bmi >= 25 && bmi < 30) {
+                return 'Overweight';
+            } else {
+                return 'Obese';
+            }
+        }
+    </script>
+
+
+</body>
+</html>
